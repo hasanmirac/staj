@@ -1,15 +1,17 @@
 // Elementleri Seçme
 const projectForm = document.querySelector("#project-form");
 const projectList = document.querySelector(".list-group");
+const projectButton = document.querySelector("#new-project");
+
 
 eventListener();
 
 function eventListener() { // Tüm event listenerlar
-    projectForm.addEventListener("submit",addProject);
+    projectButton.addEventListener("click",newProject);
     
-}
+}   
 
 
-function addProject(e) {
-    
+function newProject(e) {
+    document.querySelector(".popup").style.display = "flex";
 }

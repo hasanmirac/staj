@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="style.css">
+
     <title>Görevlerim</title>
 </head>
 <body>
@@ -25,22 +26,22 @@
                         </li>                        
                     </ul>
                     </br>
-                    <button type="submit" class="btn btn-success">Yeni Proje</button>
-                    <button type="submit" class="btn btn-danger">Sil</button>
+                    <button type="submit" id="new-project" class="btn btn-success">Yeni Proje</button>
+                    <button type="submit" id="delete-project" class="btn btn-danger">Sil</button>
                     <hr>
                     
             </div>
 
             <div class="popup">
                 <div class="popup-content">
-                    <form id = "project-form" name="form">
+                    <form class="form-container" name="form">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <input class="form-control" type="text" name="project" id = "projectName" placeholder="Proje Adı">
-
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success">Kaydet</button>
+                        <button type="submit" class="btn cancel" onclick="closeForm()">Kapat</button>
                     </form>
                 </div>
 
