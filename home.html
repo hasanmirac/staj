@@ -18,12 +18,12 @@
                     <h5 class="card-title" id = "tasks-title">Projeler</h5>
                     <hr>
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between">
+                        <!-- <li class="list-group-item d-flex justify-content-between">
                             X projesi
-                            <a href = "#">
+                            <a href = "#" class= "edit-item">
                                 <i class = "fa fa-edit"></i>
                             </a>
-                        </li>                        
+                        </li>                         -->
                     </ul>
                     </br>
                     <button type="submit" id="new-project" class="btn btn-success">Yeni Proje</button>
@@ -32,12 +32,14 @@
                     
             </div>
 
-            <div class="popup">
+            <div class="popup" id="home-popup">
                 <div class="popup-content">
-                    <form class="form-container" name="form">
+                    <h3>Yeni Proje</h3>
+                    <form id="project-form" class="form-container" name="form">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input class="form-control" type="text" name="project" id = "projectName" placeholder="Proje Adı">
+                                <label for="task"><b>Proje Adı</b></label>
+                                <input class="form-control" type="text" name="project" id = "project">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success">Kaydet</button>

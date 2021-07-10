@@ -15,16 +15,35 @@
 
             <div class="card-body">
                     <hr>
-                    <h5 class="card-title" id = "tasks-title">Projeler</h5>
+                    <h5 class="card-title" id = "tasks-title">Görevler</h5>
                     <hr>
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between">
-                            X projesi
-                            <a href = "#">
-                                <i class = "fa fa-edit"></i>
-                            </a>
-                        </li>                        
-                    </ul>
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th>Görev</th>
+                                <th>Başlangıç</th>
+                                <th>Teslim Durumu</th>
+                                <th>Önceliği</th>
+                                <th>Tamamlanma(%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Analiz</td>
+                                <td>01.01.2021</td>
+                                <td>Teslim Edildi</td>
+                                <td>Önemli</td>
+                                <td>%100</td>
+                            </tr>
+                            <tr>
+                                <td>Analiz</td>
+                                <td>01.01.2021</td>
+                                <td>Teslim Edildi</td>
+                                <td>Önemli</td>
+                                <td>%100</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     </br>
                     <button type="submit" id="new-project" class="btn btn-success">Yeni Görev</button>
                     <button type="submit" id="delete-project" class="btn btn-danger">Sil</button>
