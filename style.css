@@ -37,7 +37,7 @@
 }
 
 
-.form-container input[type=text], .form-container input[type=date] {
+.form-container input[type=text], .form-container input[type=date], #priority, #status {
     width: 200%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -112,4 +112,12 @@
 
 .content-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
+}
+
+.list-group-item .remove-item  {
+    color: red;
+}
+
+.list-group-item a {
+    justify-content: left;
 }
