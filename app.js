@@ -5,12 +5,11 @@ const newProjectButton = document.querySelector("#new-project");
 const closeButton = document.querySelector(".cancel");
 const deleteButton = document.querySelector("#delete-project");
 const popup = document.querySelector(".popup");
-const popupSave = document.querySelector
 const inputProject = document.querySelector("#project");
 const homePopup = document.querySelector("#home-popup");
 const cardBody = document.querySelector(".card-body");
 
-
+console.log(getProjetsFromStorage());
 eventListener();
 
 
@@ -20,6 +19,7 @@ function eventListener() { // Tüm event listenerlar
     projectForm.addEventListener("submit",addProject);
     document.addEventListener("DOMContentLoaded",loadAllProjetsToUI); // Sayfa yüklendiğinde çalışacak
     cardBody.addEventListener("click",deleteProject);
+    cardBody.addEventListener("click",updateProject);
 
 }
 
@@ -28,6 +28,25 @@ function closeForm() {
 }
 function openForm() {
     popup.style.display = "block";
+}
+
+
+function updateProject(index) {
+
+    
+    if (index.target.className === "fa fa-edit") {
+        console.log("aa")
+        popup.style.display = "block";
+        let webtask = localStorage.getItem("projets");
+        let taskObj = JSON.parse(webtask);
+        
+        inputProject.value = taskObj[index];
+        console.log(taskObj[index]);
+        console.log(taskObj);
+        // inputProject.textContent = e.target.parentElement.parentElement.textContent;
+        // console.log(inputProject.textContent);
+        // //inputProject.  = inputProject.textContent
+    }
 }
 
 function deleteProject(e) {
@@ -138,7 +157,7 @@ function addProjectToUI(newProject) { // String değerini list item olarak UI'ya
     const link = document.createElement("a");
     link.href = "#";  
     link.className = "edit-item";
-    link.innerHTML = "<i class = 'fa fa-edit' 'fa fa-remove'></i>";
+    link.innerHTML = "<i class = 'fa fa-edit' ></i>";
     const link2 = document.createElement("a");
     link2.href = "#";  
     link2.className = "remove-item";
@@ -147,14 +166,46 @@ function addProjectToUI(newProject) { // String değerini list item olarak UI'ya
 
     listItem.className = "list-group-item d-flex justify-content-between";
 
+
+
+    const gorevler = document.createElement("a");
+    gorevler.appendChild(document.createTextNode(newProject));
+    gorevler.href = "task.html";
+    
+    gorevler.onclick = function(){
+        window.localStorage.proje = newProject; 
+    }
+
+
     // Text Node Ekleme
-    listItem.appendChild(document.createTextNode(newProject));
+    listItem.appendChild(gorevler);
     listItem.appendChild(link);
     listItem.appendChild(link2);
-
+    
     //- Todo List'e List Item'ı ekleme
     projectList.appendChild(listItem);
     inputProject.value = "";
     //popup.style.display = "none";
 }
+ 
+/*
+
+    listItem.className = "list-group-item d-flex justify-content-between";
+
+
+
+    const gorevler = document.createElement("a");
+    gorevler.appendChild(document.createTextNode(newProject));
+    gorevler.href = "task.html";
+
+    gorevler.onclick = function(){
+        window.localStorage.proje = newProject; 
+    }
+    // Text Node Ekleme
+    listItem.appendChild(gorevler);
+    listItem.appendChild(link);
+    listItem.appendChild(link2);
+
+
+*/
 

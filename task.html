@@ -18,63 +18,100 @@
                     <h5 class="card-title" id = "tasks-title">Görevler</h5>
                     <hr>
                     <table class="content-table">
-                        <thead>
+                        <!-- <thead> -->
                             <tr>
                                 <th>Görev</th>
                                 <th>Başlangıç</th>
-                                <th>Teslim Durumu</th>
+                                <th>Durumu</th>
                                 <th>Önceliği</th>
                                 <th>Tamamlanma(%)</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <!-- <tr>
+                                <th>Görev</th>
+                                <td><input type="text" name="task" id="task"></td>
+                            </tr> -->
+                        <!-- </thead> -->
+                        <!-- <tbody id ="table-data">
+                            <!-- <tr>
+                                <th>Başlangıç</th>
+                                <td><input type="date" name="start-date" id="start-date"></td>
+                            </tr>
+                            <tr>
+                                <th>Teslim Tarihi</th>
+                                <tr><input type="date" name="end-date" id="end-date"></tr>
+                            </tr>
+                            <tr>
+                                <th>Öncelik</th>
+                                <tr><input type="text" name="priority" id="priority"></tr>
+                            </tr>
+                            <tr>
+                                <th>Tamamlanma(%)</th>
+                                <tr><input type="text" name="completion" id="completion"></id>/th>
+                            </tr> -->
+                            <!-- <tr>
+                                <td>Analiz</td>
+                                <td>01.01.2021</td>
+                                <td>Teslim Edildi</td>
+                                <td>Önemli</td>
+                                <td>%100</td>
+                                <td><a type="button" class="text-primary"><i class="fa fa-edit"></i>Düzenle</a></td>
+                                <td><a type="button" class="text-danger"><i class="fa fa-trash"></i>Sil</a></td>
+                            </tr>
+                            <tr>
+                                <td>Analiz</td>
+                                <td>01.01.2021</td>
+                                <td>Teslim Edildi</td>
+                                <td>Önemli</td>
+                                <td>%100</td>
+                            </tr> -->
+                        <!-- </tbody>  -->
+                        <!-- <td><a type="button" class="text-danger"><i class="fa fa-trash"></i>Sil</a></td> -->
+                    
+                    </table>
+                    <!-- <table>
+                        <thead>
+                            <tr>
+                                <th>Görev</th>
+                                <th>Başlangıç Tarihi</th>
+                                <th>Teslim Tarihi</th>
+                                <th>Öncelik</th>
+                                <th>Tamamlanma</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Analiz</td>
-                                <td>01.01.2021</td>
-                                <td>Teslim Edildi</td>
-                                <td>Önemli</td>
-                                <td>%100</td>
-                            </tr>
-                            <tr>
-                                <td>Analiz</td>
-                                <td>01.01.2021</td>
-                                <td>Teslim Edildi</td>
-                                <td>Önemli</td>
-                                <td>%100</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    </table> -->
                     </br>
-                    <button type="submit" id="new-project" class="btn btn-success">Yeni Görev</button>
-                    <button type="submit" id="delete-project" class="btn btn-danger">Sil</button>
+                    <button type="submit" id="new-task" class="btn btn-success">Yeni Görev</button>
+                    <button type="submit" id="delete-task" class="btn btn-danger">Sil</button>
                     <hr>
                     
             </div>
 
             <div class="popup">
                 <div class="popup-content">
-                    <form class="form-container" name="form">
+                    <form id="task-form"  class="form-container" name="form">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="task"><b>Görev</b></label>
-                                <input class="form-control" type="text" name="task" id = "taskName">
+                                <input class="form-control" type="text" name="task" id = "task-name">
                                 <label for="start-date"><b>Tahmini Başlama Tarihi</b></label>
                                 <input class="form-control" type="date" name="task" id = "start-date">
-                                <label for="end-date"><b>Teslim Tarihi</b></label>
-                                <input class="form-control" type="date" name="task" id = "end-date">
-                                <label for="end-date"><b>Durumu</b></label><br>
+                                <!-- <label for="end-date"><b>Teslim Tarihi</b></label>
+                                <input class="form-control" type="date" name="task" id = "end-date"> -->
+                                <label for="status"><b>Durumu</b></label><br>
                                 <select name="status" id="status">
-                                    <option value="baslanmadı">Başlanmadı</option>
-                                    <option value="baslandı">Başlandı</option>
-                                    <option value="bitti">Bitti</option>
+                                    <option value="Başlanmadı">Başlanmadı</option>
+                                    <option value="Başlandı">Başlandı</option>
+                                    <option value="Bitti">Bitti</option>
                                 </select> <br>
                                 <label for="priority"><b>Öncelik</b></label><br>
                                 <select name="priority" id="priority">
-                                    <option value="low">Düşük</option>
-                                    <option value="normal">Normal</option>
-                                    <option value="high">Yüksek</option>
+                                    <option value="Düşük">Düşük</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Yüksek">Yüksek</option>
                                 </select>
-                                <label for="priority"><b>Tamamlanma Oranı %(0 - 100)</b></label>
+                                <label for="completion"><b>Tamamlanma Oranı %(0 - 100)</b></label>
                                 <input class="form-control" type="text" name="completion" id="completion">
                             </div>
                         </div>
@@ -96,6 +133,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
+    <script src="task.js"></script>
 </body>
 </html>

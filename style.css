@@ -25,7 +25,7 @@
     bottom: 0px;
     right: 40rem;
     border: 3px solid #f1f1f1;
-    z-index: 9;
+    z-index: 10;
 
 }
 
@@ -90,11 +90,11 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);    ;
 }
 
-.content-table thead tr {
-    background-color: #009879;
-    color: #fff;
+.content-table tr {
+    /* background-color: #009879; */
+    /* color: #fff; */
     text-align: left;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .content-table th,
@@ -102,16 +102,23 @@
     padding: 12px 15px;
 }
 
-.content-table tbody tr {
+/* .content-table tr {
     border-bottom: 1px solid #dddddd;
-}
+} */
 
-.content-table tbody tr:nth-of-type(even){
+.content-table tr:nth-of-type(even){
     background-color: #f3f3f3;
 }
 
-.content-table tbody tr:last-of-type {
+/* .content-table tr:last-of-type {
     border-bottom: 2px solid #009879;
+} */
+
+.content-table tr:first-of-type {
+    border-bottom: 2px solid #009879;
+    background-color: #009879;
+    color: #fff;
+    font-weight: bold;
 }
 
 .list-group-item .remove-item  {
