@@ -4,6 +4,7 @@ const newTaskButton = document.querySelector("#new-task");
 const closeButton = document.querySelector(".cancel");
 const cardBody = document.querySelector(".card-body");
 const table = document.querySelector(".content-table");
+const tableBody = document.querySelector("#table-data");
 const title = document.querySelector("#tasks-title");
 const popup = document.querySelector(".popup");
 const inputTaskName = document.querySelector("#task-name");
@@ -14,11 +15,8 @@ const priority = document.querySelector("#priority");
 const completion = document.querySelector("#completion");
 const taskForm = document.querySelector("#task-form");
 
-//var myJsonObj = '[{"inputTaskName:"analiz","startDate":"2021-10-11"}]';
-//var jsObj = JSON.parse(myJsonObj);
 
 
-console.log(getTasksFromStorage());
 eventListener();
 var taskArray = [];
 
@@ -28,6 +26,7 @@ function eventListener() {
     closeButton.addEventListener("click",closeForm);
     document.addEventListener("DOMContentLoaded",loadAllTasksToUI); // Sayfa yüklendiğinde çalışacak
     taskForm.addEventListener("submit",addTask);
+    
 }
 
 function closeForm() {
@@ -35,6 +34,7 @@ function closeForm() {
 }
 function openForm() {
     popup.style.display = "block";
+    clearPopup();
 }
 
 
@@ -104,32 +104,67 @@ function addTaskToUI() {
     popup.style.display = "none"    
     newTask.preventDefault();
     */
-    
-    var _inputTaskName = inputTaskName.value;
-    var _startDate = startDate.value;
-    var _inputStatus = inputStatus.value;
-    var _priority = priority.value;
-    var _completion = completion.value;
+        
+        var _inputTaskName = inputTaskName.value;
+        var _startDate = startDate.value;
+        var _inputStatus = inputStatus.value;
+        var _priority = priority.value;
+        var _completion = completion.value;
 
-    var taskObj = {inputTaskName:_inputTaskName,startDate:_startDate,inputStatus:_inputStatus,priority:_priority,completion:_completion};
-    taskArray.push(taskObj);
+        var taskObj = {inputTaskName:_inputTaskName,startDate:_startDate,inputStatus:_inputStatus,priority:_priority,completion:_completion};
+        
+        if (selectedIndex === -1) {
+            taskArray.push(taskObj);
+        } 
+        else {
+            taskArray.splice(selectedIndex,1,taskObj);
+        }
 
-    localStorage.tasksRecord = JSON.stringify(taskArray);
-    prepareTableCell(_inputTaskName,_startDate,_inputStatus,_priority,_completion);
+        localStorage.tasksRecord = JSON.stringify(taskArray);
+
+        //prepareTableCell(_inputTaskName,_startDate,_inputStatus,_priority,_completion);
+        loadAllTasksToUI();
+        clearPopup();
+        
+        popup.style.display = "none";
+        
+        //e.preventDefault();
+    }
+
+    var selectedIndex = -1;
+    function updateTask(index) {
+        selectedIndex = index;
+        console.log(index)
+        document.querySelector("#save-task").innerHTML = "Güncelle";
+        popup.style.display = "block";
+        var taskObj = taskArray[index];
+
+        inputTaskName.value = taskObj.inputTaskName;
+        startDate.value = taskObj.startDate;
+        inputStatus.value = taskObj.inputStatus;
+        priority.value = taskObj.priority;
+        completion.value = taskObj.completion;
+    }
+
+    function clearPopup() {
+        //selectedIndex = -1;
+        inputTaskName.value = "";
+        startDate.value = "";
+        inputStatus.value = "Başlanmadı";
+        priority.value = "Normal";
+        completion.value = "";
+        document.querySelector("#save-task").textContent = "Kaydet";
+    }
 
 
-    
-    popup.style.display = "none";
-    //e.preventDefault();
-}
 
     function addTask(e) {
-        
         addTaskToUI(e);
         //addTaskToStorage(e);
 
         
         popup.style.display = "none";
+        clearPopup();
         e.preventDefault();
     }
 
@@ -182,8 +217,8 @@ function addTaskToUI() {
     //     // localStorage.setItem("tasks",JSON.stringify(tasks));
     // }
 
-    function prepareTableCell(_inputTaskName,_startDate,_inputStatus,_priority,_completion){ // Tablo hazırlar
-        newRow = table.insertRow();
+    function prepareTableCell(index,inputTaskName,startDate,inputStatus,priority,completion){ // Tablo hazırlar
+        newRow = tableBody.insertRow();
         cell1 = newRow.insertCell(0);
         cell2 = newRow.insertCell(1);
         cell3 = newRow.insertCell(2);
@@ -192,13 +227,13 @@ function addTaskToUI() {
         cell6 = newRow.insertCell(5);
         cell7 = newRow.insertCell(6);
 
-        cell1.innerHTML = inputTaskName.value;
-        cell2.innerHTML = startDate.value;
-        cell3.innerHTML = inputStatus.value;
-        cell4.innerHTML = priority.value;
-        cell5.innerHTML = "%"+completion.value;
-        cell6.innerHTML = "<a type='button' class='text-primary'><i class='fa fa-edit'></i>Düzenle</a>";
-        cell7.innerHTML = "<a type='button' class='text-danger'><i class='fa fa-trash'></i>Sil</a>";
+        cell1.innerHTML = inputTaskName;
+        cell2.innerHTML = startDate;
+        cell3.innerHTML = inputStatus;
+        cell4.innerHTML = priority;
+        cell5.innerHTML = "%"+completion;
+        cell6.innerHTML = "<a type='button' class='text-primary' onclick='updateTask("+index+")'><i class='fa fa-edit'>Düzenle</i></a>";
+        cell7.innerHTML = "<a type='button' class='text-danger' onclick='deleteTask("+index+")'><i class='fa fa-trash'>Sil</i></a>";
 
         inputTaskName.value = "";
         startDate.value = "";
@@ -207,24 +242,60 @@ function addTaskToUI() {
         completion.value = "";
     }
 
+    function deleteTask(index) {
+
+        //console.log(e.target);
+        // if(e.target.className == "fa fa-trash"){
+        //     e.target.parentElement.parentElement.parentElement.remove();
+        //     deleteTaskFromStorage(e.target.parentElement.parentElement.parentElement.textContent);
+        //     console.log(e.target.parentElement.parentElement.parentElement.textContent);
+            // taskArray.splice(index,1);
+            // localStorage.tasksRecord = JSON.stringify(taskArray);
+            // loadAllTasksToUI();
+            //table.deleteRow(index+1); gerek yok
+            taskArray.splice(index,1);
+            localStorage.tasksRecord = JSON.stringify(taskArray);
+            loadAllTasksToUI();
+        //}
+        // if (e.target.className == "text-danger") {
+        //     e.target.parentElement.parentElement.remove();
+        //     console.log(e.target)
+        //     console.log(e.target.parentElement.textContent)
+        //     console.log(e.parentElement.parentElement);
+        //     console.log(e.target.parentElement.parentElement.textContent);
+            
+        // }
+    }
+
+    function deleteTaskFromStorage(deleteTask) { //Projeleri Storagedan silme
+        let tasks = getTasksFromStorage();
+        
+        tasks.forEach(function(task,index) {
+            // if (task === deleteTask) {
+            //     console.log("silme işlemi")
+            //     tasks.splice(index,1); // Arrayden değeri siler
+            // }
+            console.log(task)
+            localStorage.getItem("tasksRecord")
+            //localStorage.setItem("tasksRecord",JSON.stringify(tasksRecord));
+        });
     
-        function loadAllTasksToUI() {
+    }
+
+
+    
+    function loadAllTasksToUI() {
             // let tasksRecord = getTasksFromStorage();
 
             // tasksRecord.forEach(function(tasks) {
             //     addTaskToUI(tasks);
             // });
+            tableBody.innerHTML = "";
 
             if (localStorage.tasksRecord){
                 taskArray= JSON.parse(localStorage.tasksRecord);
                 for (var i = 0; i < taskArray.length; i++) {
-                    // var gorev = taskArray[i].inputTaskName;
-                    // var baslangıc  = taskArray[i].startDate;
-                    // var durum = taskArray[i].inputStatus;
-                    // var oncelik = taskArray[i].priority;
-                    // var tamamlanma = taskArray[i].completion;
-
-                    prepareTableCell(taskArray[i].inputTaskName,taskArray[i].startDate,taskArray[i].inputStatus,taskArray[i].priority,taskArray[i].completion);
+                    prepareTableCell(i,taskArray[i].inputTaskName,taskArray[i].startDate,taskArray[i].inputStatus,taskArray[i].priority,taskArray[i].completion);
                 }
             }
     }

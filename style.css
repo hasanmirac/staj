@@ -114,7 +114,7 @@
     border-bottom: 2px solid #009879;
 } */
 
-.content-table tr:first-of-type {
+.content-table thead tr:first-of-type {
     border-bottom: 2px solid #009879;
     background-color: #009879;
     color: #fff;

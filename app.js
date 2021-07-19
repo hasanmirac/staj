@@ -9,7 +9,6 @@ const inputProject = document.querySelector("#project");
 const homePopup = document.querySelector("#home-popup");
 const cardBody = document.querySelector(".card-body");
 
-console.log(getProjetsFromStorage());
 eventListener();
 
 
@@ -62,7 +61,7 @@ function deleteProject(e) {
 
 function deleteProjectFromStorage(deleteProject) { //Projeleri Storagedan silme
     let projects = getProjetsFromStorage();
-
+    console.log(deleteProject)
     projects.forEach(function(project,index) {
         if (project === deleteProject) {
             projects.splice(index,1); // Arrayden değeri siler
