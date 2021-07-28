@@ -22,6 +22,46 @@ function eventListener() { // Tüm event listenerlar
 
 }
 
+// check for saved 'darkMode' in localStorage
+let darkMode = localStorage.getItem('darkMode'); 
+
+const darkModeToggle = document.querySelector('#dark-mode-toggle');
+
+const enableDarkMode = () => {
+  // 1. Add the class to the body
+  document.body.classList.add('darkmode');
+  // 2. Update darkMode in localStorage
+  localStorage.setItem('darkMode', 'enabled');
+}
+
+const disableDarkMode = () => {
+  // 1. Remove the class from the body
+  document.body.classList.remove('darkmode');
+  // 2. Update darkMode in localStorage 
+  localStorage.setItem('darkMode', null);
+}
+ 
+// If the user already visited and enabled darkMode
+// start things off with it on
+if (darkMode === 'enabled') {
+  enableDarkMode();
+}
+
+// When someone clicks the button
+darkModeToggle.addEventListener('click', () => {
+  // get their darkMode setting
+  darkMode = localStorage.getItem('darkMode'); 
+  
+  // if it not current enabled, enable it
+  if (darkMode !== 'enabled') {
+    enableDarkMode();
+  // if it has been enabled, turn it off  
+  } else {  
+    disableDarkMode(); 
+  }
+});
+
+
 function closeForm() {
     popup.style.display = "none";
 }
@@ -31,20 +71,19 @@ function openForm() {
 
 
 function updateProject(index) {
-
     
-    if (index.target.className === "fa fa-edit") {
-        console.log("aa")
-        popup.style.display = "block";
-        let webtask = localStorage.getItem("projets");
-        let taskObj = JSON.parse(webtask);
-        
-        inputProject.value = taskObj[index];
-        console.log(taskObj[index]);
-        console.log(taskObj);
+        if (index.target.className === "fa fa-edit") {
+        popup.style.display = "block";    
+        // var projectObj = projectArray[index];
+        var projectObj = [];
+        // inputProject.value = projectObj.inputProject;
+        console.log(JSON.parse(localStorage.getItem("projets")));
+        projectObj  = JSON.parse(localStorage.getItem("projets"))
+        console.log(projectObj[index])    
+        //console.log(projectObj[index]);
+        //console.log(projectObj[index]);
         // inputProject.textContent = e.target.parentElement.parentElement.textContent;
         // console.log(inputProject.textContent);
-        // //inputProject.  = inputProject.textContent
     }
 }
 
@@ -184,27 +223,7 @@ function addProjectToUI(newProject) { // String değerini list item olarak UI'ya
     //- Todo List'e List Item'ı ekleme
     projectList.appendChild(listItem);
     inputProject.value = "";
-    //popup.style.display = "none";
+    
 }
- 
-/*
 
-    listItem.className = "list-group-item d-flex justify-content-between";
-
-
-
-    const gorevler = document.createElement("a");
-    gorevler.appendChild(document.createTextNode(newProject));
-    gorevler.href = "task.html";
-
-    gorevler.onclick = function(){
-        window.localStorage.proje = newProject; 
-    }
-    // Text Node Ekleme
-    listItem.appendChild(gorevler);
-    listItem.appendChild(link);
-    listItem.appendChild(link2);
-
-
-*/
 

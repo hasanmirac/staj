@@ -1,25 +1,61 @@
+// Elementler
 const taskList = document.querySelector(".list-group");
-
 const newTaskButton = document.querySelector("#new-task");
 const closeButton = document.querySelector(".cancel");
 const cardBody = document.querySelector(".card-body");
 const table = document.querySelector(".content-table");
 const tableBody = document.querySelector("#table-data");
-const title = document.querySelector("#tasks-title");
+const taskTitle = document.querySelector("#tasks-title");
 const popup = document.querySelector(".popup");
+const title = document.querySelector("#tasks-title");
 const inputTaskName = document.querySelector("#task-name");
 const startDate = document.querySelector("#start-date");
-//const endDate = document.querySelector("#end-date");
 const inputStatus = document.querySelector("#status");
 const priority = document.querySelector("#priority");
 const completion = document.querySelector("#completion");
 const taskForm = document.querySelector("#task-form");
 
+// console.log(JSON.parse(localStorage.getItem("tasksRecord"))[0])
+// var tasksRecord_serilezed = JSON.stringify(localStorage.tasksRecord);
+// for(let a of tasksRecord_serilezed ) {
+//     console.log(a.inputTaskName)
+//}
+// console.log(tasksRecord_serilezed)
+// (JSON.parse(localStorage.tasksRecord)) 
+//     if(tasksRecord.inputTaskName === "Analiz")
+//         console.log(JSON.parse(localStorage.tasksRecord))
+// sortTable(table,1)
+// var obj = (JSON.parse(localStorage.tasksRecord))
+// console.log(obj.startDate)
+// console.log(JSON.parse(localStorage.tasksRecord))
+// console.log( JSON.parse(localStorage.tasksRecord))
+// const sort = document.querySelector("table thead tr .date");
+// sort.addEventListener("click",sortting);
+// function sortting () {
+
+// }
+// function sortTable(tables, column, asc = true){
+//     const dirModifier = asc ? 1 : -1;
+//     tableBody = tables.tBodies[0];
+//     const rows = Array.from(tableBody.querySelectorAll("tr"));
+//     //const rows = JSON.parse(localStorage.getItem("tasksRecord"))
+
+//     const sortedRows = rows.sort((a,b) => {
+//         const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+//         const bColText = b.querySelector(`td:nth-child(${column+1})`).textContent.trim();
+        
+//         return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+//     });
+//     console.log(sortedRows)
+// }
+
+// sortTable(table,1);
+
+
 
 
 eventListener();
 var taskArray = [];
-
 
 function eventListener() {
     newTaskButton.addEventListener("click",openForm);
@@ -29,6 +65,46 @@ function eventListener() {
     
 }
 
+// check for saved 'darkMode' in localStorage
+let darkMode = localStorage.getItem('darkMode'); 
+
+const darkModeToggle = document.querySelector('#dark-mode-toggle');
+
+const enableDarkMode = () => {
+  // 1. Add the class to the body
+  document.body.classList.add('darkmode');
+  // 2. Update darkMode in localStorage
+  localStorage.setItem('darkMode', 'enabled');
+}
+
+const disableDarkMode = () => {
+  // 1. Remove the class from the body
+  document.body.classList.remove('darkmode');
+  // 2. Update darkMode in localStorage 
+  localStorage.setItem('darkMode', null);
+}
+ 
+// If the user already visited and enabled darkMode
+// start things off with it on
+if (darkMode === 'enabled') {
+  enableDarkMode();
+}
+
+// When someone clicks the button
+darkModeToggle.addEventListener('click', () => {
+  // get their darkMode setting
+  darkMode = localStorage.getItem('darkMode'); 
+  
+  // if it not current enabled, enable it
+  if (darkMode !== 'enabled') {
+    enableDarkMode();
+  // if it has been enabled, turn it off  
+  } else {  
+    disableDarkMode(); 
+  }
+});
+
+
 function closeForm() {
     popup.style.display = "none";
 }
@@ -37,81 +113,16 @@ function openForm() {
     clearPopup();
 }
 
-
-function addTaskToUI() {
-
-//     const tablerow = document.createElement('tr');
-//     const tabledata = document.createElement("td");
-//     const edit = document.createElement("a");
-//     const remove = document.createElement("a");
-
-//     edit.href = "#";
-//     edit.className = "edit-item";
-//     edit.innerHTML = "<i class='fa fa-edit'></i>";
-
-//     remove.href = "#";
-//     remove.className = "remove-item";
-//     remove.innerHTML = "<i class='fa fa-trash'></i>";
-
-//     tablerow.appendChild(document.createTextNode(newTask));
-//     tablerow.appendChild(tabledata);
-//     tablerow.appendChild(edit);
-//     tablerow.appendChild(remove);
-
-//     taskList.appendChild(tablerow);
-    
-//     // const newTask = task.value;
-//      console.log(newTask);
-
-//    e.preventDefault();
-
-/*
-    let taskData = [
-        { name : inputTaskName.value , startDate : startDate.value, status : status.value , priority : priority.value , completion: completion.value   },
-        { name : inputTaskName.value , startDate : startDate.value, status : status.value , priority : priority.value , completion: completion.value   },
-        { name : inputTaskName.value , startDate : startDate.value, status : status.value , priority : priority.value , completion: completion.value   },
-        { name : inputTaskName.value , startDate : startDate.value, status : status.value , priority : priority.value , completion: completion.value   },
-
-    ];
-
-    window.onload = () => {
-        loadTableData(taskData);
+function addTaskToUI() { // Görev ekleme
         
-    };
-
-    function loadTableData(taskData) {
-        const tableBody = document.querySelector("#table-data");
-        let taskHtml = '' ;
-
-        for(let task of taskData) {
-            taskHtml += `<tr>
-            <td>${task.name}</td>
-            <td>${task.startDate}</td>
-            <td>${task.status}</td>
-            <td>${task.priority}</td>
-            <td>%${task.completion}</td>
-            <td><a type="button" class="text-primary"><i class="fa fa-edit"></i>Düzenle</a></td>
-            <td><a type="button" class="text-danger"><i class="fa fa-trash"></i>Sil</a></td>
-            </tr>`;
-        }
-        
-        tableBody.innerHTML = taskHtml;
-        
-    }
-
-    loadTableData(taskData);
-
-    popup.style.display = "none"    
-    newTask.preventDefault();
-    */
-        
+        var project  = localStorage.getItem("proje");
         var _inputTaskName = inputTaskName.value;
         var _startDate = startDate.value;
         var _inputStatus = inputStatus.value;
         var _priority = priority.value;
         var _completion = completion.value;
 
-        var taskObj = {inputTaskName:_inputTaskName,startDate:_startDate,inputStatus:_inputStatus,priority:_priority,completion:_completion};
+        var taskObj = {project,inputTaskName:_inputTaskName,startDate:_startDate,inputStatus:_inputStatus,priority:_priority,completion:_completion};
         
         if (selectedIndex === -1) {
             taskArray.push(taskObj);
@@ -134,7 +145,6 @@ function addTaskToUI() {
     var selectedIndex = -1;
     function updateTask(index) {
         selectedIndex = index;
-        console.log(index)
         document.querySelector("#save-task").innerHTML = "Güncelle";
         popup.style.display = "block";
         var taskObj = taskArray[index];
@@ -147,7 +157,7 @@ function addTaskToUI() {
     }
 
     function clearPopup() {
-        //selectedIndex = -1;
+        selectedIndex = -1;
         inputTaskName.value = "";
         startDate.value = "";
         inputStatus.value = "Başlanmadı";
@@ -181,41 +191,6 @@ function addTaskToUI() {
         return tasksRecord;
     }
 
-    
-    
-
-    // function getTasksFromStorage() {
-    //     let tasks;
-
-    //     if(localStorage.getItem("tasks") === null ){
-    //         tasks = [];
-    //     }
-    //     else {
-    //         tasks = JSON.parse(localStorage.getItem("tasks"));
-    //     }
-    //     return tasks;
-    // }
-
-    // function addTaskToStorage() {
-    //     let tasks = getTasksFromStorage();
-
-    //     if (localStorage.tasksRecord){
-    //         taskArray= JSON.parse(localStorage.tasksRecord);
-    //         for (var i = 0; i < taskArray.length; i++) {
-    //             // var gorev = taskArray[i].inputTaskName;
-    //             // var baslangıc  = taskArray[i].startDate;
-    //             // var durum = taskArray[i].inputStatus;
-    //             // var oncelik = taskArray[i].priority;
-    //             // var tamamlanma = taskArray[i].completion;
-
-    //             prepareTableCell(taskArray[i].inputTaskName,taskArray[i].startDate,taskArray[i].inputStatus,taskArray[i].priority,taskArray[i].completion);
-    //         }
-    //     }
-
-    //     // tasks.push(newTask);
-
-    //     // localStorage.setItem("tasks",JSON.stringify(tasks));
-    // }
 
     function prepareTableCell(index,inputTaskName,startDate,inputStatus,priority,completion){ // Tablo hazırlar
         newRow = tableBody.insertRow();
@@ -244,58 +219,24 @@ function addTaskToUI() {
 
     function deleteTask(index) {
 
-        //console.log(e.target);
-        // if(e.target.className == "fa fa-trash"){
-        //     e.target.parentElement.parentElement.parentElement.remove();
-        //     deleteTaskFromStorage(e.target.parentElement.parentElement.parentElement.textContent);
-        //     console.log(e.target.parentElement.parentElement.parentElement.textContent);
-            // taskArray.splice(index,1);
-            // localStorage.tasksRecord = JSON.stringify(taskArray);
-            // loadAllTasksToUI();
-            //table.deleteRow(index+1); gerek yok
             taskArray.splice(index,1);
             localStorage.tasksRecord = JSON.stringify(taskArray);
             loadAllTasksToUI();
-        //}
-        // if (e.target.className == "text-danger") {
-        //     e.target.parentElement.parentElement.remove();
-        //     console.log(e.target)
-        //     console.log(e.target.parentElement.textContent)
-        //     console.log(e.parentElement.parentElement);
-        //     console.log(e.target.parentElement.parentElement.textContent);
-            
-        // }
-    }
-
-    function deleteTaskFromStorage(deleteTask) { //Projeleri Storagedan silme
-        let tasks = getTasksFromStorage();
         
-        tasks.forEach(function(task,index) {
-            // if (task === deleteTask) {
-            //     console.log("silme işlemi")
-            //     tasks.splice(index,1); // Arrayden değeri siler
-            // }
-            console.log(task)
-            localStorage.getItem("tasksRecord")
-            //localStorage.setItem("tasksRecord",JSON.stringify(tasksRecord));
-        });
-    
     }
 
 
     
-    function loadAllTasksToUI() {
-            // let tasksRecord = getTasksFromStorage();
-
-            // tasksRecord.forEach(function(tasks) {
-            //     addTaskToUI(tasks);
-            // });
+    function loadAllTasksToUI() { //Görevleri UI a yükleme
+            
+            taskTitle.innerHTML = ""+localStorage.proje+" Görevleri";
             tableBody.innerHTML = "";
 
             if (localStorage.tasksRecord){
                 taskArray= JSON.parse(localStorage.tasksRecord);
                 for (var i = 0; i < taskArray.length; i++) {
-                    prepareTableCell(i,taskArray[i].inputTaskName,taskArray[i].startDate,taskArray[i].inputStatus,taskArray[i].priority,taskArray[i].completion);
+                    if (taskArray[i].project === localStorage.proje)
+                        prepareTableCell(i,taskArray[i].inputTaskName,taskArray[i].startDate,taskArray[i].inputStatus,taskArray[i].priority,taskArray[i].completion);
                 }
             }
     }
@@ -307,25 +248,3 @@ function addTaskToUI() {
 
         localStorage.setItem("tasksRecord",JSON.stringify(tasksRecord));
     }
-
-
-    
-
-    //addTaskToUI(a);
-
-    // console.log(newPriority)
-
-    // addTaskToUI(newTaskName);
-    // addTaskToUI(newStartDate);
-    
-    // var newRow = table.insertRow(row);
-
-    // var cell1 = newRow.insertCell(0);
-    // var cell2 = newRow.insertCell(1);
-    // var cell3 = newRow.insertRow(2);
-
-    // cell1.innerHTML = newTaskName;
-    // cell2.innerHTML = newStartDate;
-
-    // row++
-
