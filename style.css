@@ -24,23 +24,45 @@
 
     display: none;
     position: fixed;
-    bottom: 0px;
-    right: 40rem;
-    border: 3px solid #f1f1f1;
+    width: auto;
+    overflow: auto;
+    /* bottom: 0px;
+    right: 40rem; */
+    border: 1px solid #000000;
+    border-radius: 10px;
     z-index: 10;
+    /* padding: 60px 25px 25px 25px; */
+    margin: 120px 100px;
+    padding: 20px 20px 20px 0px ;
+    
+}
 
+#task-popup {
+    margin: -400px 100px ;
+    padding: 0px;
+}
+
+.form-container button {
+    color: #00100d;
 }
 
 
 .form-container {
-    max-width: 500px;
-    padding: 10px;
-    background-color: white;
+    /* max-width: 500px; */
+    width: 80%; /* Full width */
+    /* height: 0%; Full height */
+    overflow: auto;
+    padding: 30px;
+    margin: 40px 200px 20px 100px;
+    /* background-color: white; */
+    /* 3fd5f3 */
 }
 
 
+
+
 .form-container input[type=text], .form-container input[type=date], #priority, #status {
-    width: 200%;
+    width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
@@ -153,8 +175,11 @@
     --clr-primary: #b0a2ff;
     --clr-secondary: #c3fcf2;
     --clr-success: #5cb85c;
-    --clr-table-light: #b5fffa;
-    --clr-table-dark: #fd5b5b;
+    --clr-table: #e4eef0;
+    --clr-popup : #4b8c9b;
+    --clr-task-table: #e1fbfc;
+    --clr-task-table-even: #a0babb;
+    --clr-task-table-thead: #be79ad;
 
     --foreground: var(--clr-dark);
     --background: var(--clr-light);
@@ -169,6 +194,11 @@
     --clr-primary: #202302;
     --clr-secondary: #00100d;
     --clr-success: #ff7750;
+    --clr-table: #f6fabf;
+    --clr-popup: #ff433c;
+    --clr-task-table: #f0efcf;
+    --clr-task-table-even: #ebeadb;
+    --clr-task-table-thead: #34610f;
 
     --foreground: var(--clr-light);
     --background: var(--clr-dark);
@@ -222,7 +252,12 @@ h5 {
 }
 
 .list-group li {
-    background: var(--clr-table-light);
+    background: var(--clr-table);
+    color: var(--foreground);
+}
+
+.popup{
+    background: var(--clr-popup);
     color: var(--foreground);
 }
 
@@ -236,6 +271,21 @@ h5 {
     top: 4px;
     border-radius: inherit;
     z-index: -1;
+}
+
+.content-table tbody {
+    background: var(--clr-task-table);
+}
+
+.content-table tr:nth-of-type(even){
+    background : var(--clr-task-table-even)
+}
+
+.content-table thead tr:first-of-type {
+    border-bottom: 2px solid #000000;
+    background: var(--clr-task-table-thead);
+    color: #fff;
+    font-weight: bold;
 }
 
 .intro {
@@ -268,5 +318,14 @@ h5 {
 
 hr {
         background-color: #c3fcf2;
-        opacity: 0.3;
+        opacity: 0.4;
 }
+
+.form-container .btn {
+    width: 150px;
+}
+
+.content-table tbody {
+    color: #000000;
+}
+
