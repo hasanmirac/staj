@@ -114,6 +114,10 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);    ;
 }
 
+.card-body{
+    font-size: 1.2em;
+}
+
 .content-table tr {
     /* background-color: #009879; */
     /* color: #fff; */
@@ -123,7 +127,7 @@
 
 .content-table th,
 .content-table td {
-    padding: 12px 15px;
+    padding: 15px 20px;
 }
 
 /* .content-table tr {
@@ -160,13 +164,6 @@
 .list-group li a{
     align-items: flex-start;
 }
-
-/* @import url("https://fonts.googleapis.com/css?family=Assistant:400,700|Playfair+Display:900");
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-} */
 
 
 :root {
@@ -205,8 +202,6 @@
 
     
 }
-
-
 
 body {
     background: var(--background);
@@ -327,5 +322,19 @@ hr {
 
 .content-table tbody {
     color: #000000;
+}
+
+li > *{
+    display: inline-block;
+    vertical-align: middle;
+    }
+
+.project-table .list-group .li:hover{
+    background-color: #00100d;
+}
+
+li:hover {
+    background-color: #a0babb;
+    transform: scale(1.02);
 }
 

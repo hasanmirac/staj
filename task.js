@@ -65,40 +65,38 @@ function eventListener() {
     
 }
 
-// check for saved 'darkMode' in localStorage
+// localStorage'da kaydedilmiş karanlık modu konrol eder
 let darkMode = localStorage.getItem('darkMode'); 
 
 const darkModeToggle = document.querySelector('#dark-mode-toggle');
 
 const enableDarkMode = () => {
-  // 1. Add the class to the body
+  // darkmode u ekler
     document.body.classList.add('darkmode');
-  // 2. Update darkMode in localStorage
+  // localStorge da darkmode u günceller 
     localStorage.setItem('darkMode', 'enabled');
 }
 
 const disableDarkMode = () => {
-  // 1. Remove the class from the body
+  // darkmode u kaldırır
     document.body.classList.remove('darkmode');
-  // 2. Update darkMode in localStorage 
+  // localStorge da darkmode u günceller  
     localStorage.setItem('darkMode', null);
 }
 
-// If the user already visited and enabled darkMode
-// start things off with it on
+// sayfa yenilendiğinde darkmode a göre başlar
 if (darkMode === 'enabled') {
     enableDarkMode();
 }
 
-// When someone clicks the button
 darkModeToggle.addEventListener('click', () => {
-  // get their darkMode setting
+  // darkMode u oku
     darkMode = localStorage.getItem('darkMode'); 
 
-  // if it not current enabled, enable it
+  // etkinleştirme
     if (darkMode !== 'enabled') {
     enableDarkMode();
-  // if it has been enabled, turn it off  
+  // etkinse kapat  
     } else {  
     disableDarkMode(); 
     }
@@ -139,7 +137,6 @@ function addTaskToUI() { // Görev ekleme
         
         popup.style.display = "none";
         
-        //e.preventDefault();
     }
 
     var selectedIndex = -1;
@@ -170,8 +167,7 @@ function addTaskToUI() { // Görev ekleme
 
     function addTask(e) {
         addTaskToUI(e);
-        //addTaskToStorage(e);
-
+        
         
         popup.style.display = "none";
         clearPopup();
@@ -201,6 +197,10 @@ function addTaskToUI() { // Görev ekleme
         cell5 = newRow.insertCell(4);
         cell6 = newRow.insertCell(5);
         cell7 = newRow.insertCell(6);
+        cell8 = newRow.insertCell(7);
+        cell9 = newRow.insertCell(8);
+        cell10 = newRow.insertCell(9);
+        cell11 = newRow.insertCell(10);
 
         cell1.innerHTML = inputTaskName;
         cell2.innerHTML = startDate;
@@ -233,14 +233,14 @@ function addTaskToUI() { // Görev ekleme
             tableBody.innerHTML = "";
 
             if (localStorage.tasksRecord){
-                taskArray= JSON.parse(localStorage.tasksRecord);
+                taskArray= JSON.parse(localStorage.tasksRecord)
                 for (var i = 0; i < taskArray.length; i++) {
                     if (taskArray[i].project === localStorage.proje)
                         prepareTableCell(i,taskArray[i].inputTaskName,taskArray[i].startDate,taskArray[i].inputStatus,taskArray[i].priority,taskArray[i].completion);
                 }
             }
     }
-
+    
     function addTaskToStorage(taskArray) {
         let tasksRecord = getProjetsFromStorage();
 
@@ -248,3 +248,24 @@ function addTaskToUI() { // Görev ekleme
 
         localStorage.setItem("tasksRecord",JSON.stringify(tasksRecord));
     }
+
+    $('th').on('click',function(){
+        var column = $(this).data("column");
+        var order = $(this).data("order");
+        console.log("Column was cliked!", column , order);
+
+        if(order == 'desc'){
+            $(this).data('order' , "asc")
+            JSON.parse(localStorage.tasksRecord) = JSON.parse(localStorage.tasksRecord).sort((a,b) => a[column] > b[column] ? 1 : -1 )
+        } else{
+            $(this).data('order', "desc")
+            tasksRecord  = JSON.parse(localStorage.tasksRecord).sort((a,b) => a[column] < b[column] ? 1 : -1 )
+        }
+        loadAllTasksToUI();
+    })
+    // console.log(JSON.parse(localStorage.tasksRecord)).sort
+
+    
+    // console.log(JSON.parse(localStorage.getItem("tasksRecord")));
+    // console.log(localStorage.tasksRecord)
+    

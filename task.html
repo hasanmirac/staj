@@ -20,11 +20,15 @@
                     <table class="content-table">
                         <thead>
                             <tr>
-                                <th>Görev</th>
-                                <th class="date">Başlangıç</th>
-                                <th>Durumu</th>
-                                <th>Önceliği</th>
+                                <th data-column="gorev">Görev</th>
+                                <th data-column="baslangıc" data-order="desc">Başlangıç</th>
+                                <th data-column="durum">Durumu</th>
+                                <th >Önceliği</th>
                                 <th>Tamamlanma(%)</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -97,8 +101,6 @@
                                 <input class="form-control" type="text" name="task" id = "task-name">
                                 <label for="start-date"><b>Tahmini Başlama Tarihi</b></label>
                                 <input class="form-control" type="date" name="task" id = "start-date">
-                                <!-- <label for="end-date"><b>Teslim Tarihi</b></label>
-                                <input class="form-control" type="date" name="task" id = "end-date"> -->
                                 <label for="status"><b>Durumu</b></label><br>
                                 <select name="status" id="status">
                                     <option value="Başlanmadı">Başlanmadı</option>
@@ -125,6 +127,7 @@
                 <svg width="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496"><path fill="currentColor" d="M8,256C8,393,119,504,256,504S504,393,504,256,393,8,256,8,8,119,8,256ZM256,440V72a184,184,0,0,1,0,368Z" transform="translate(-8 -8)"/></svg>
             </button>
 
+            
 
         </div>
         
@@ -136,7 +139,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!-- <script src="app.js"></script> -->
     <script src="task.js"></script>
 </body>
 </html>

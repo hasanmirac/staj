@@ -22,43 +22,41 @@ function eventListener() { // Tüm event listenerlar
 
 }
 
-// check for saved 'darkMode' in localStorage
+// localStorage'da kaydedilmiş karanlık modu konrol eder
 let darkMode = localStorage.getItem('darkMode'); 
 
 const darkModeToggle = document.querySelector('#dark-mode-toggle');
 
 const enableDarkMode = () => {
-  // 1. Add the class to the body
-  document.body.classList.add('darkmode');
-  // 2. Update darkMode in localStorage
-  localStorage.setItem('darkMode', 'enabled');
+  // darkmode u ekler
+    document.body.classList.add('darkmode');
+  // localStorge da darkmode u günceller
+    localStorage.setItem('darkMode', 'enabled');
 }
 
 const disableDarkMode = () => {
-  // 1. Remove the class from the body
-  document.body.classList.remove('darkmode');
-  // 2. Update darkMode in localStorage 
-  localStorage.setItem('darkMode', null);
-}
- 
-// If the user already visited and enabled darkMode
-// start things off with it on
-if (darkMode === 'enabled') {
-  enableDarkMode();
+  // darkmode u kaldırır
+    document.body.classList.remove('darkmode');
+  // localStorge da darkmode u günceller
+    localStorage.setItem('darkMode', null);
 }
 
-// When someone clicks the button
-darkModeToggle.addEventListener('click', () => {
-  // get their darkMode setting
-  darkMode = localStorage.getItem('darkMode'); 
-  
-  // if it not current enabled, enable it
-  if (darkMode !== 'enabled') {
+// sayfa yenilendiğinde darkmode a göre başlar
+if (darkMode === 'enabled') {   
     enableDarkMode();
-  // if it has been enabled, turn it off  
-  } else {  
+}
+
+darkModeToggle.addEventListener('click', () => {
+  // darkMode u oku
+    darkMode = localStorage.getItem('darkMode'); 
+
+  // etkinleştirme
+    if (darkMode !== 'enabled') {
+    enableDarkMode();
+  // etkinse kapat  
+} else {  
     disableDarkMode(); 
-  }
+    }
 });
 
 
@@ -79,11 +77,7 @@ function updateProject(index) {
         // inputProject.value = projectObj.inputProject;
         console.log(JSON.parse(localStorage.getItem("projets")));
         projectObj  = JSON.parse(localStorage.getItem("projets"))
-        console.log(projectObj[index])    
-        //console.log(projectObj[index]);
-        //console.log(projectObj[index]);
-        // inputProject.textContent = e.target.parentElement.parentElement.textContent;
-        // console.log(inputProject.textContent);
+        
     }
 }
 
@@ -195,7 +189,7 @@ function addProjectToUI(newProject) { // String değerini list item olarak UI'ya
     const link = document.createElement("a");
     link.href = "#";  
     link.className = "edit-item";
-    link.innerHTML = "<i class = 'fa fa-edit' ></i>";
+    link.innerHTML = "<i class = 'fa fa-edit'></i>";
     const link2 = document.createElement("a");
     link2.href = "#";  
     link2.className = "remove-item";
@@ -203,7 +197,6 @@ function addProjectToUI(newProject) { // String değerini list item olarak UI'ya
 
 
     listItem.className = "list-group-item d-flex justify-content-between";
-
 
 
     const gorevler = document.createElement("a");
@@ -217,7 +210,7 @@ function addProjectToUI(newProject) { // String değerini list item olarak UI'ya
 
     // Text Node Ekleme
     listItem.appendChild(gorevler);
-    listItem.appendChild(link);
+    //listItem.appendChild(link);
     listItem.appendChild(link2);
     
     //- Todo List'e List Item'ı ekleme
